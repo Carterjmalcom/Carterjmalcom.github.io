@@ -7,6 +7,7 @@ body {
   font-family: "Space Grotesk", sans-serif;
   background: #0a0a0a;
   color: #f3f4f6;
+  scroll-behavior: smooth;
 }
 
 @layer utilities {
@@ -34,7 +35,7 @@ body {
   }
 
   .animate-loading-bar {
-    animation: loading 0.8s ease infinite;
+    animation: loading 0.5s ease infinite;
   }
 }
 

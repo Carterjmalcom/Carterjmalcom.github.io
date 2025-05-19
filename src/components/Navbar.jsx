@@ -4,52 +4,57 @@ export const Navbar = ({ menuOpen, setMenuOpen }) => {
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
   }, [menuOpen]);
+
   return (
-    <nav className="fixed top-0 w-full z-40 bg-[rgba(10, 10, 10, 0.8)] backdrop-blur-lg border-b border-white/10 shadow-lg">
+    <nav className="fixed top-0 w-full z-40 bg-black/80 backdrop-blur-lg border-b border-red-500/20 shadow-lg">
       <div className="max-w-5xl mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           <a href="#home" className="font-mono text-xl font-bold text-white">
-            {" "}
-            pedro<span className="text-blue-500">.tech</span>{" "}
+            malco<span className="text-red-500">.dev</span>
           </a>
 
           <div
-            className="w-7 h-5 relative cursor-pointer z-40 md:hidden"
+            className="w-7 h-5 relative cursor-pointer z-50 md:hidden text-white"
             onClick={() => setMenuOpen((prev) => !prev)}
           >
-            &#9776;
+            {menuOpen ? "✕" : "☰"}
           </div>
-
           <div className="hidden md:flex items-center space-x-8">
-            <a
-              href="#home"
-              className="text-gray-300 hove:text-white transition-colors"
-            >
-              {" "}
-              Home
-            </a>
-            <a
-              href="#about"
-              className="text-gray-300 hove:text-white transition-colors"
-            >
-              {" "}
-              About{" "}
-            </a>
-            <a
-              href="#projects"
-              className="text-gray-300 hove:text-white transition-colors"
-            >
-              {" "}
-              Projects{" "}
-            </a>
-            <a
-              href="#contact"
-              className="text-gray-300 hove:text-white transition-colors"
-            >
-              {" "}
-              Contact{" "}
-            </a>
+            {["home", "about", "projects", "contact"].map((section) => (
+              <a
+                key={section}
+                href={`#${section}`}
+                className="text-gray-300 relative group"
+              >
+                <span className="group-hover:text-white transition-colors">
+                  {section.charAt(0).toUpperCase() + section.slice(1)}
+                </span>
+                <span className="block h-0.5 bg-red-500 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
+              </a>
+            ))}
           </div>
+        </div>
+      </div>
+
+      <div
+        className={`fixed top-0 right-0 h-screen w-1/2 bg-black text-white transform ${
+          menuOpen ? "translate-x-0" : "translate-x-full"
+        } transition-transform duration-300 ease-in-out md:hidden z-40 shadow-lg border-l border-red-500/20`}
+      >
+        <div className="flex flex-col space-y-6 p-8">
+          {["home", "about", "projects", "contact"].map((section) => (
+            <a
+              key={section}
+              href={`#${section}`}
+              className="text-gray-300 relative group"
+              onClick={() => setMenuOpen(false)}
+            >
+              <span className="group-hover:text-white transition-colors">
+              {section.charAt(0).toUpperCase() + section.slice(1)}
+              </span>
+              <span className="block h-0.5 bg-red-500 scale-x-0 group-hover:scale-x-37 transition-transform origin-left duration-300" />
+            </a>
+          ))}
         </div>
       </div>
     </nav>
